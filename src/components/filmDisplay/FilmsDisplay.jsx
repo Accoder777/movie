@@ -1,13 +1,15 @@
 import React from 'react'
 import styles from './FilmsDisplay.module.css'
 
-const FilmsDisplay = ({filmData}) => {
+const FilmsDisplay = ({filmData = []}) => {
+  const moviesdata = filmData;
+  
   return (
     <div className={styles.filmCardContainer}>
         {
-          filmData.map(({id,title,rate})=>(
+          filmData.map(({id,title,vote_average,poster_path})=>(
             <div key={id} className={styles.filmCard}>
-            <img src="/assets/image/filmPicture.png" alt="film" width={266} height={400} />
+            <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="film" width={266} height={400} />
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.starRate}>
               <span>
@@ -20,7 +22,7 @@ const FilmsDisplay = ({filmData}) => {
                   stroke="#FFAD49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-              {" "}{rate}
+              {" "}{vote_average}
           </div>
           </div>
           ))

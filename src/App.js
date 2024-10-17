@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import './styles/App.css'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Movies from './pages/movies/Movies'
@@ -11,22 +11,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 import DashboardLayout from './layout/DashboardLayout'
 import AuthRequired from './components/authRequired/AuthRequired'
 import SuggestMe from './pages/SuggestMe'
-import { CreatedContext } from './pages/context/UserContext'
 
-function Logout (){
-  const {dispatch} = useContext(CreatedContext)
-
-  useEffect(()=>{
-    dispatch(
-      {
-        type: 'Auth',
-        value: false
-      }
-    )
-  },[dispatch])
-  
-  return <></>
-}
 
 const App = () => {
   return (
@@ -48,7 +33,7 @@ const App = () => {
         <Route element={<AuthRequired/>}>
           <Route path='/dashboard' element={<DashboardLayout/>}>
             <Route path='/dashboard' element={<Dashboard/>}/>
-            <Route path='/dashboard/logout' element={<Logout/>}/>
+            <Route path='/dashboard/logout' element={<Navigate to='/login' replace='true'/>}/>
           </Route>
 
           {/* Error pages */}

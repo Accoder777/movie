@@ -3,6 +3,7 @@ import styles from './BodyTop.module.css'
 import SeaurchVal from '../seaurch/SeaurchVal'
 
 const BodyTop = ({ BodyTopTitle,BodyTopDesc, value, setValue}) => {
+  
   return (
     <div className={styles.BodyTop}>
       

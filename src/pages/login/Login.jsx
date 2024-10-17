@@ -3,8 +3,6 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import { Navigate, useNavigate } from 'react-router-dom';
-import { CreatedContext } from '../context/UserContext';
-import { useContext } from 'react';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -12,7 +10,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  const {dispatch} = useContext(CreatedContext)
 
   const navigator = useNavigate();
 
@@ -25,27 +22,17 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values, {setSubmitting, resetForm})=>{
         setTimeout(() => {
+          console.log(values)
           if(values.email === "Rozimurod@gmail.com" && values.password === "secret"){
             toast.success('Welcome to your website')
-            resetForm();
-
-            // dispatch
-            dispatch({
-              type: 'all',
-              value: {
-                user: values.email,
-                isAuthenticate: true
-              },
-            })
-
-            // navigator
             navigator('/dashboard')
+            resetForm();
           }else{
             toast.error('email or password is incorrect')
             resetForm();
           }
           setSubmitting(false)
-        }, 2000);
+        }, 5000);
     }
   })
 
